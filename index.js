@@ -1,7 +1,10 @@
 const express = require('express');
 const path = require('path');
+const dotenv = require('dotenv');
 //const MongoClient = require('mongodb').MongoClient; importar monogodb
 //const {MongoClient} = require('mongodb'); //importar mongodb
+
+dotenv.config();
 
 const Database = require('./src/core/Database/database.js');
 const swaggerJsDoc = require('swagger-jsdoc');

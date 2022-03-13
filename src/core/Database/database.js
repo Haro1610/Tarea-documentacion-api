@@ -1,6 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
+require('dotenv').config();
 
-const mongoUrl = 'mongodb+srv://Aaron:4421@cluster0.xvgni.mongodb.net/Clase11?retryWrites=true&w=majority'
+const mongoUrl = process.env.MONGO_URL;
 
 
 
