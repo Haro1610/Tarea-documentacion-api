@@ -1,4 +1,6 @@
 const Role = require("./role.model");
+const Database = require('../../core/Database/database.js');
+
 
 
 const RolesController = {
@@ -18,9 +20,19 @@ const RolesController = {
             }
         });
     },
-    create: (req, res) => {
-        res.status(200).send({});
-    },
+    createRole: (req, res) => {
+        //console.log(req.body);
+
+        const new_role ={
+            name: req.body.name,
+
+        };
+        Database.collection("Role").insertOne(new_role, function(err, res) {
+            if(err) console.log("err");
+            else console.log("Post success")
+        });
+        res.send("Post success");
+      },
     update: (req, res) => {
         let id = req.params.id;
         if(id != undefined) res.status(200).send(`Role with ${id} was updated`);

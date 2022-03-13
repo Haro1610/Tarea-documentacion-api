@@ -33,7 +33,34 @@ const controller = require('./userGroups.controller');
  
 router.get('/:id', controller.getById);
 
-router.post('/',controller.create);
+/**
+ * @swagger
+ *   /api/userGroups{name,roles,users,messages}:
+ *     post:
+ *       tags:
+ *         - userGroups
+ *       description: Create a new user group
+ *     parameters:
+ *       - in: body
+ *         name: name
+ *         description: user name
+ *         type: string
+ *       - in: body
+ *         name: roles
+ *         description: Roles of the user
+ *         type: array
+ *       - in: body
+ *         name: users
+ *         description: user users
+ *         type: array
+ *       - in: body
+ *         name: messages
+ *         description: user messages
+ *         type: array
+ *          
+ */
+router.post('/',controller.createUserGroup);
+
 router.put('/:id',controller.update);
 router.delete('/:id',controller.delete);
 router.patch('/:id',controller.patch);

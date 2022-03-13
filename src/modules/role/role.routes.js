@@ -33,7 +33,21 @@ const controller = require('./roles.controller');
  
 router.get('/:id', controller.getById);
 
-router.post('/',controller.create);
+/**
+ * @swagger
+ *   /api/Roles{role}:
+ *     post:
+ *       tags:
+ *         - Roles
+ *       description: Create a new role
+ *     parameters:
+ *       - in: body
+ *         name: role
+ *         description: user role
+ *         type: string
+ *          
+ */
+router.post('/',controller.createRole);
 router.put('/:id',controller.update);
 router.delete('/:id',controller.delete);
 router.patch('/:id',controller.patch);

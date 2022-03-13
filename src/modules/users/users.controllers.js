@@ -21,26 +21,20 @@ const UsersController ={
     },
     login: (req, res) => {
         const user = new User();
-        user.getById({ "email": req.params.email }).then((result) => {
-          if (
-            result.password === req.params.password &&
-            req.params.connected != true
-          ) {
-            const connected = true;
-            connected.push(req.body.connected);
-            result.url ="http://127.0.01:3000/users/" + result._id;
-    
-            user.findOneAndUpdate({ _id: result._id }, { connected: connected });
-          } else {
-            res.sendStatus(404);
-          }
-        });
+
+        user.getOne(req.params.id).then(result =>{
+            if(result){
+                res.send(result);
+            }else{
+                res.sendStatus(404);
+            }
+        })
       },
     
       createUser: (req, res) => {
-        //console.log(req.body.email);
-        //console.log(req.body.password);
-        const new_user = {
+        //console.log(req.body);
+
+        const new_user ={
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
@@ -50,22 +44,22 @@ const UsersController ={
         };
         Database.collection("Users").insertOne(new_user, function(err, res) {
             if(err) console.log("err");
-            else console.log("Todo bien")
+            else console.log("Post success")
         });
-        res.send("Todo bien");
+        res.send("Post success");
       },
 
       
       update: (req, res) => {
         let id = req.params.id;
-        if (id != undefined) res.status(200).send(`User Group with ${id} was updated`);
-        else res.status(400).send(`User Group with ${id} was not found`);
+        if (id != undefined) res.status(200).send(`User  with ${id} was updated`);
+        else res.status(400).send(`User  with ${id} was not found`);
 
     },
     delete: (req,res) =>{
         let id = req.params.id;
-        if(id != undefined) res.status(200).send(`User Group with ${id} was deleted`);
-        else res.status(400).send(`User Group with ${id} was not found`);
+        if(id != undefined) res.status(200).send(`User  with ${id} was deleted`);
+        else res.status(400).send(`User  with ${id} was not found`);
 
     },
     patch: (req,res) =>{

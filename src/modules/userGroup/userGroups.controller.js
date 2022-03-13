@@ -1,4 +1,6 @@
 const userGroup = require("./userGroup.model");
+const Database = require('../../core/Database/database.js');
+
 
 const UsersGroupsController = {
     getAll: (req, res) => {
@@ -17,9 +19,23 @@ const UsersGroupsController = {
             }
         });
     },
-    create: (req, res) => {
-        res.status(200).send({});
-    },
+    createUserGroup: (req, res) => {
+        //console.log(req.body);
+
+        const new_user_group ={
+            name: req.body.name,
+            roles: req.body.roles,
+            users: req.body.users,
+            messages: req.body.messages,
+
+        };
+        Database.collection("userGroup").insertOne(new_user_group, function(err, res) {
+            if(err) console.log("err");
+            else console.log("Post success")
+        });
+        res.send("Post success");
+      },
+
     update: (req, res) => {
         let id = req.params.id;
         if(id != undefined) res.status(200).send(`User Group with ${id} was updated`);

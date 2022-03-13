@@ -1,4 +1,6 @@
 const Message = require("./message.model");
+const Database = require('../../core/Database/database.js');
+
 
 const MessagesController = {
     getAll: (req, res) => {
@@ -17,9 +19,19 @@ const MessagesController = {
             }
         });
     },
-    create: (req, res) => {
-        res.status(200).send({});
-    },
+    createMessage: (req, res) => {
+        //console.log(req.body);
+        const new_message ={
+            sender: req.body.sender,
+            text: req.body.text,
+            date: req.body.date
+        };
+        Database.collection("Message").insertOne(new_message, function(err, res) {
+            if(err) console.log("err");
+            else console.log("Post success")
+        });
+        res.send("Post success");
+      },
     update: (req, res) => {
         let id = req.params.id;
         if(id != undefined) res.status(200).send(`Message with ${id} was updated`);

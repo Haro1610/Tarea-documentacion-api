@@ -75,7 +75,7 @@ router.get('/:id', controller.getById);
  *         type: string
  *          
  */
- router.post("/:email/:password", controller.createUser);
+ router.post("/", controller.createUser);
 
 router.delete('/:id',controller.delete);
 router.patch('/:id',controller.patch);

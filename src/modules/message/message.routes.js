@@ -33,7 +33,29 @@ const controller = require('./messages.controller');
  
 router.get('/:id', controller.getById);
 
-router.post('/',controller.create);
+/**
+ * @swagger
+ *   /api/Messages{sender,text,date}:
+ *     post:
+ *       tags:
+ *         - Messages
+ *       description: Create a new Messages
+ *     parameters:
+ *       - in: body
+ *         name: sender
+ *         description: user Message sender
+ *         type: string
+ *       - in: body
+ *         name: text
+ *         description: text Message
+ *         type: string
+ *       - in: body
+ *         name: date
+ *         description:  Messages date
+ *         type: string
+ *          
+ */
+router.post('/',controller.createMessage);
 router.put('/:id',controller.update);
 router.delete('/:id',controller.delete);
 router.patch('/:id',controller.patch);
