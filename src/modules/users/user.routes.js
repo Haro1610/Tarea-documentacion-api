@@ -73,6 +73,10 @@ router.get('/:id', controller.getById);
  *         name: password
  *         description: user password
  *         type: string
+ *       - in: body
+ *         name: role
+ *         description: user role
+ *         type: string
  *          
  */
  router.post("/", controller.createUser);
