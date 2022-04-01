@@ -21,15 +21,31 @@ const UsersController ={
     },
     login: (req, res) => {
         const user = new User();
-
-        user.getOne(req.params.id).then(result =>{
-            if(result){
-                res.send(result);
-            }else{
-                res.sendStatus(404);
-            }
-        })
+    
+        user.findEmail(req.body.email).then((result) => {
+          if (result) {
+            if(req.body.password == result.password) {
+              result.connection = true;
+              res.send(result);
+              
+            } else res.send(404);
+          } else {
+            res.sendStatus(404);
+          }
+        });
       },
+
+    // login: (req, res) => {
+    //     const user = new User();
+
+    //     user.getOne(req.params.id).then(result =>{
+    //         if(result){
+    //             res.send(result);
+    //         }else{
+    //             res.sendStatus(404);
+    //         }
+    //     })
+    //   },
     
       createUser: (req, res) => {
         //console.log(req.body);
@@ -38,15 +54,15 @@ const UsersController ={
             name: req.body.name,
             email: req.body.email,
             password: req.body.password,
-            connection: req.body.connection,
+            connection: false,
             role: req.body.role
 
         };
         Database.collection("Users").insertOne(new_user, function(err, res) {
-            if(err) console.log("err");
+            if(err) console.log("error");
             else console.log("Post success")
         });
-        res.send("Post success");
+        res.send(new_user);
       },
 
       
